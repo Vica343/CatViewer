@@ -1,4 +1,6 @@
 package hu.bme.aut.android.catviewer.ui.about
 
-class About {
+fun AboutDetails()
+{
+    // TODO
 }
