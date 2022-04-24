@@ -1,38 +1,11 @@
 package hu.bme.aut.android.catviewer.network
 
+import com.skydoves.sandwich.ApiResponse
 import hu.bme.aut.android.catviewer.model.Cat
-import hu.bme.aut.android.catviewer.model.Favorite
 
-class CatService {
-     fun getImages(): List<Cat> {
-         // TODO
-         return emptyList()
-     }
+import retrofit2.http.GET
 
-    fun GetFavorites(): List<Favorite> {
-        // TODO
-        return emptyList()
-    }
-
-    fun GetUploaded(): List<Cat> {
-        // TODO
-        return emptyList()
-    }
-
-    fun AddFavorite() {
-        // TODO
-    }
-
-    fun DeleteFavorite() {
-        // TODO
-    }
-
-    fun UploadImage() {
-        // TODO
-    }
-
-    fun DeleteImage() {
-        // TODO
-    }
-
+interface CatService {
+    @GET("images/search?limit=15")
+    suspend fun fetchCatList(): ApiResponse<List<Cat>>
 }
