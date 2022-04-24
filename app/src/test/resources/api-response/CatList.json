@@ -1,0 +1,263 @@
+[
+  {
+    "breeds":[
+
+    ],
+    "categories":[
+      {
+        "id":9,
+        "name":"dream"
+      }
+    ],
+    "id":"6ft",
+    "url":"https://cdn2.thecatapi.com/images/6ft.jpg",
+    "width":500,
+    "height":332
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"a5l",
+    "url":"https://cdn2.thecatapi.com/images/a5l.jpg",
+    "width":500,
+    "height":293
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"b7q",
+    "url":"https://cdn2.thecatapi.com/images/b7q.jpg",
+    "width":500,
+    "height":319
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"b8c",
+    "url":"https://cdn2.thecatapi.com/images/b8c.jpg",
+    "width":480,
+    "height":360
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"chb",
+    "url":"https://cdn2.thecatapi.com/images/chb.jpg",
+    "width":480,
+    "height":360
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"cm9",
+    "url":"https://cdn2.thecatapi.com/images/cm9.jpg",
+    "width":500,
+    "height":375
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"cph",
+    "url":"https://cdn2.thecatapi.com/images/cph.gif",
+    "width":312,
+    "height":239
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"e7i",
+    "url":"https://cdn2.thecatapi.com/images/e7i.jpg",
+    "width":900,
+    "height":600
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"MTcyNTM5Mg",
+    "url":"https://cdn2.thecatapi.com/images/MTcyNTM5Mg.jpg",
+    "width":900,
+    "height":598
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"MTg4MjM4Mg",
+    "url":"https://cdn2.thecatapi.com/images/MTg4MjM4Mg.jpg",
+    "width":368,
+    "height":491
+  },
+  {
+    "breeds":[
+      {
+        "weight":{
+          "imperial":"5 - 11",
+          "metric":"2 - 5"
+        },
+        "id":"sfol",
+        "name":"Scottish Fold",
+        "cfa_url":"http://cfa.org/Breeds/BreedsSthruT/ScottishFold.aspx",
+        "vetstreet_url":"http://www.vetstreet.com/cats/scottish-fold-highland-fold",
+        "vcahospitals_url":"https://vcahospitals.com/know-your-pet/cat-breeds/scottish-fold",
+        "temperament":"Affectionate, Intelligent, Loyal, Playful, Social, Sweet, Loving",
+        "origin":"United Kingdom",
+        "country_codes":"GB",
+        "country_code":"GB",
+        "description":"The Scottish Fold is a sweet, charming breed. She is an easy cat to live with and to care for. She is affectionate and is comfortable with all members of her family. Her tail should be handled gently. Folds are known for sleeping on their backs, and for sitting with their legs stretched out and their paws on their belly. This is called the \"Buddha Position\".",
+        "life_span":"11 - 14",
+        "indoor":0,
+        "alt_names":"Scot Fold",
+        "adaptability":5,
+        "affection_level":5,
+        "child_friendly":4,
+        "dog_friendly":5,
+        "energy_level":3,
+        "grooming":1,
+        "health_issues":4,
+        "intelligence":3,
+        "shedding_level":3,
+        "social_needs":3,
+        "stranger_friendly":3,
+        "vocalisation":1,
+        "experimental":0,
+        "hairless":0,
+        "natural":0,
+        "rare":0,
+        "rex":0,
+        "suppressed_tail":0,
+        "short_legs":0,
+        "wikipedia_url":"https://en.wikipedia.org/wiki/Scottish_Fold",
+        "hypoallergenic":0,
+        "reference_image_id":"o9t0LDcsa"
+      }
+    ],
+    "id":"iI8IyNGDg",
+    "url":"https://cdn2.thecatapi.com/images/iI8IyNGDg.jpg",
+    "width":1680,
+    "height":1050
+  },
+  {
+    "breeds":[
+      {
+        "weight":{
+          "imperial":"6 - 12",
+          "metric":"3 - 5"
+        },
+        "id":"tonk",
+        "name":"Tonkinese",
+        "cfa_url":"http://cfa.org/Breeds/BreedsSthruT/Tonkinese.aspx",
+        "vetstreet_url":"http://www.vetstreet.com/cats/tonkinese",
+        "vcahospitals_url":"https://vcahospitals.com/know-your-pet/cat-breeds/tonkinese",
+        "temperament":"Curious, Intelligent, Social, Lively, Outgoing, Playful, Affectionate",
+        "origin":"Canada",
+        "country_codes":"CA",
+        "country_code":"CA",
+        "description":"Intelligent and generous with their affection, a Tonkinese will supervise all activities with curiosity. Loving, social, active, playful, yet content to be a lap cat",
+        "life_span":"14 - 16",
+        "indoor":0,
+        "lap":1,
+        "alt_names":"Tonk",
+        "adaptability":5,
+        "affection_level":5,
+        "child_friendly":4,
+        "dog_friendly":5,
+        "energy_level":5,
+        "grooming":1,
+        "health_issues":1,
+        "intelligence":5,
+        "shedding_level":3,
+        "social_needs":5,
+        "stranger_friendly":5,
+        "vocalisation":5,
+        "experimental":0,
+        "hairless":0,
+        "natural":0,
+        "rare":0,
+        "rex":0,
+        "suppressed_tail":0,
+        "short_legs":0,
+        "wikipedia_url":"https://en.wikipedia.org/wiki/Tonkinese_(cat)",
+        "hypoallergenic":0,
+        "reference_image_id":"KBroiVNCM"
+      }
+    ],
+    "id":"ECqe13G5B",
+    "url":"https://cdn2.thecatapi.com/images/ECqe13G5B.jpg",
+    "width":1080,
+    "height":1350
+  },
+  {
+    "breeds":[
+      {
+        "weight":{
+          "imperial":"7 - 15",
+          "metric":"3 - 7"
+        },
+        "id":"toyg",
+        "name":"Toyger",
+        "vetstreet_url":"http://www.vetstreet.com/cats/toyger",
+        "temperament":"Playful, Social, Intelligent",
+        "origin":"United States",
+        "country_codes":"US",
+        "country_code":"US",
+        "description":"The Toyger has a sweet, calm personality and is generally friendly. He's outgoing enough to walk on a leash, energetic enough to play fetch and other interactive games, and confident enough to get along with other cats and friendly dogs.",
+        "life_span":"12 - 15",
+        "indoor":0,
+        "lap":1,
+        "alt_names":"",
+        "adaptability":5,
+        "affection_level":5,
+        "child_friendly":4,
+        "dog_friendly":5,
+        "energy_level":5,
+        "grooming":1,
+        "health_issues":2,
+        "intelligence":5,
+        "shedding_level":3,
+        "social_needs":3,
+        "stranger_friendly":5,
+        "vocalisation":5,
+        "experimental":0,
+        "hairless":0,
+        "natural":0,
+        "rare":0,
+        "rex":0,
+        "suppressed_tail":0,
+        "short_legs":0,
+        "wikipedia_url":"https://en.wikipedia.org/wiki/Toyger",
+        "hypoallergenic":0,
+        "reference_image_id":"O3F3_S1XN"
+      }
+    ],
+    "id":"HW1MGAuGL",
+    "url":"https://cdn2.thecatapi.com/images/HW1MGAuGL.jpg",
+    "width":1600,
+    "height":1200
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"LpkpO2jCb",
+    "url":"https://cdn2.thecatapi.com/images/LpkpO2jCb.jpg",
+    "width":429,
+    "height":315
+  },
+  {
+    "breeds":[
+
+    ],
+    "id":"m1hJP-IWO",
+    "url":"https://cdn2.thecatapi.com/images/m1hJP-IWO.jpg",
+    "width":323,
+    "height":574
+  }
+]
