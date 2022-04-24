@@ -29,8 +29,7 @@ object PersistenceModule {
     @Provides
     @Singleton
     fun provideCatDao(appDatabase: AppDatabase): CatDao {
-        // TODO
-        return CatDao()
+        return appDatabase.catDao()
     }
 
 }
