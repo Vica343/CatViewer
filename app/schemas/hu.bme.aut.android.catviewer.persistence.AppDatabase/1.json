@@ -2,16 +2,22 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b9984f37c704145c0b7e0e9761da2d7b",
+    "identityHash": "52fb58bc77e1da4db68d1f3ac1e09e52",
     "entities": [
       {
         "tableName": "CatEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `url` TEXT NOT NULL, `uploaded` INTEGER NOT NULL, `favorite` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `imageid` TEXT, `url` TEXT NOT NULL, `uploaded` INTEGER NOT NULL, `favorite` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageid",
+            "columnName": "imageid",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
@@ -46,7 +52,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b9984f37c704145c0b7e0e9761da2d7b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '52fb58bc77e1da4db68d1f3ac1e09e52')"
     ]
   }
 }

@@ -1,9 +1,6 @@
 package hu.bme.aut.android.catviewer.model
 
-
-class Cat : ArrayList<CatItem>()
-
-data class CatItem(
+data class Cat(
     val breeds: List<Any>,
     val categories: List<Category>,
     val height: Int,
