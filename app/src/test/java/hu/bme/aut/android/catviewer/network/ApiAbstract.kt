@@ -14,7 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
+
 
 @RunWith(JUnit4::class)
 abstract class ApiAbstract<T> {
@@ -58,7 +59,7 @@ abstract class ApiAbstract<T> {
         return Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
             .build()
             .create(clazz)
     }
