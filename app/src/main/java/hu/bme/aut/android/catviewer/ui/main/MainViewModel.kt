@@ -15,6 +15,9 @@ import timber.log.Timber
 import androidx.annotation.StringRes
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 
 @HiltViewModel
@@ -23,7 +26,7 @@ class MainViewModel @Inject constructor(
     mainRepository: MainRepository
 ) : ViewModel() {
 
-    val catList: Flow<List<CatEntity>> =
+    var catList: Flow<List<CatEntity>> =
         mainRepository.loadCatImages(
             onStart = { _isLoading.value = true },
             onCompletion = { _isLoading.value = false },
@@ -31,11 +34,29 @@ class MainViewModel @Inject constructor(
         )
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
+    private val _isRefreshing: MutableState<Boolean> = mutableStateOf(false)
+
     val isLoading: State<Boolean> get() = _isLoading
+    val isRefreshing: State<Boolean> get() = _isRefreshing
+
+    private val repository : MainRepository
 
     init {
         Timber.d("injection MainViewModel")
+        repository = mainRepository
 
+    }
+
+    fun addFavorite(id: Int?, value : Boolean) = viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch {
+            repository.AddToFavorite(id, value)
+        }
+    }
+
+    fun refreshImages() = viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch {
+            repository.RefreshImages()
+        }
     }
 
     fun uploadImage(cat: Cat) = viewModelScope.launch(Dispatchers.IO) {
@@ -46,9 +67,7 @@ class MainViewModel @Inject constructor(
         // TODO
     }
 
-    fun addFavorite(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        // TODO
-    }
+
 
     fun deleteFavorite(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         // TODO

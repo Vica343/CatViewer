@@ -8,7 +8,7 @@ import hu.bme.aut.android.catviewer.model.Cat
 
 @Entity
 data class CatEntity (
-    @PrimaryKey(autoGenerate = true) var id: Long?,
+    @PrimaryKey(autoGenerate = true) var id: Int?,
     @ColumnInfo(name = "imageid") var imageid: String?,
     @ColumnInfo(name = "url") var url : String,
     @ColumnInfo(name = "uploaded") var uploaded : Boolean,

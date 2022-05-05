@@ -1,5 +1,6 @@
 package hu.bme.aut.android.catviewer.ui.main
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import hu.bme.aut.android.catviewer.model.db.CatEntity
@@ -27,14 +28,15 @@ class MainRepository @Inject constructor(
         onCompletion: () -> Unit,
         onError: (String) -> Unit
     ) = flow {
-        val cats: List<CatEntity> = catDao.getCatList();
-        if (cats.isEmpty()) {
+        while (true) {
+            val cats: List<CatEntity> = catDao.getCatList();
+        if (cats.size < 15) {
             // request API network call asynchronously.
             catService.fetchCatList()
                 // handle the case when the API request gets a success response.
                 .suspendOnSuccess {
-                    val  catdata: List<CatEntity> = data.map {
-                        list-> CatEntity(0, list.id, list.url, false, false)
+                    val catdata: List<CatEntity> = data.map { list ->
+                        CatEntity(null, list.id, list.url, false, false)
                     }
                     catDao.insertCatList(catdata)
                     emit(catdata)
@@ -45,5 +47,21 @@ class MainRepository @Inject constructor(
         } else {
             emit(cats)
         }
+    }
     }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
+
+    @WorkerThread
+    suspend fun AddToFavorite(
+        id: Int?,
+        value: Boolean
+    ) {
+        catDao.updateFavorite(id, value)
+    }
+
+    @WorkerThread
+    suspend fun RefreshImages(
+    ) {
+        catDao.refreshCatListDelete()
+    }
+
 }
