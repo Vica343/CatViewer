@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="hu.bme.aut.android.catviewer">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".CatViewer"
@@ -23,6 +24,7 @@
         </activity>
         <provider
             android:name="androidx.startup.InitializationProvider"
+            android:authorities="hu.bme.aut.android.catviewer.androidx-startup"
             android:exported="false"
             tools:node="merge">
 

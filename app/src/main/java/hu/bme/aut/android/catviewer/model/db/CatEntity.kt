@@ -2,7 +2,9 @@ package hu.bme.aut.android.catviewer.model.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import hu.bme.aut.android.catviewer.model.Cat
 
 @Entity
 data class CatEntity (
@@ -23,4 +25,14 @@ data class CatEntity (
             favorite = false
         )
     }
+}
+
+fun CatEntity.mapToCatEntity(cat : Cat): CatEntity {
+    return CatEntity(
+        id = 0,
+        imageid = cat.id,
+        url = this.url,
+        uploaded = false,
+        favorite = false
+    )
 }
