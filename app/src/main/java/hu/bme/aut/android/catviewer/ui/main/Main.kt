@@ -7,8 +7,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 
-// TODO
-
 @Composable
 fun CatMainScreen() {
     val navController = rememberNavController()

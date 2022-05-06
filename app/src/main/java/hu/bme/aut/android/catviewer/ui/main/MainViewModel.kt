@@ -39,7 +39,11 @@ class MainViewModel @Inject constructor(
     val isLoading: State<Boolean> get() = _isLoading
     val isRefreshing: State<Boolean> get() = _isRefreshing
 
+
+
     private val repository : MainRepository
+
+
 
     init {
         Timber.d("injection MainViewModel")
@@ -59,8 +63,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun uploadImage(cat: Cat) = viewModelScope.launch(Dispatchers.IO) {
-        // TODO
+    fun uploadImage(url: String) = viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
+            repository.UploadImage(url)
+        }
     }
 
     fun deleteImage(id: Int) = viewModelScope.launch(Dispatchers.IO) {

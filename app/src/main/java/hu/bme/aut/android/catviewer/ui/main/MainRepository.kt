@@ -1,4 +1,5 @@
 package hu.bme.aut.android.catviewer.ui.main
+
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.skydoves.sandwich.onFailure
@@ -29,25 +30,26 @@ class MainRepository @Inject constructor(
         onError: (String) -> Unit
     ) = flow {
         while (true) {
-            val cats: List<CatEntity> = catDao.getCatList();
-        if (cats.size < 15) {
-            // request API network call asynchronously.
-            catService.fetchCatList()
-                // handle the case when the API request gets a success response.
-                .suspendOnSuccess {
-                    val catdata: List<CatEntity> = data.map { list ->
-                        CatEntity(null, list.id, list.url, false, false)
+            val cats: List<CatEntity> = catDao.getCatList().reversed();
+            val randomcats = cats.filter { cat -> cat.uploaded == false && cat.favorite == false }
+            if (cats.size < 15) {
+                // request API network call asynchronously.
+                catService.fetchCatList()
+                    // handle the case when the API request gets a success response.
+                    .suspendOnSuccess {
+                        val catdata: List<CatEntity> = data.map { list ->
+                            CatEntity(null, list.id, list.url, false, false)
+                        }
+                        catDao.insertCatList(catdata)
+                        emit(catdata)
                     }
-                    catDao.insertCatList(catdata)
-                    emit(catdata)
-                }
-                // handle the case when the API request is fails.
-                // e.g. internal server error.
-                .onFailure { onError(this) }
-        } else {
-            emit(cats)
+                    // handle the case when the API request is fails.
+                    // e.g. internal server error.
+                    .onFailure { onError(this) }
+            } else {
+                emit(cats)
+            }
         }
-    }
     }.onStart { onStart() }.onCompletion { onCompletion() }.flowOn(Dispatchers.IO)
 
     @WorkerThread
@@ -62,6 +64,13 @@ class MainRepository @Inject constructor(
     suspend fun RefreshImages(
     ) {
         catDao.refreshCatListDelete()
+    }
+
+    @WorkerThread
+    suspend fun UploadImage(
+        url: String,
+    ) {
+        catDao.insertCat(CatEntity(null, "0", url, true, false))
     }
 
 }

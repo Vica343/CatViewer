@@ -9,6 +9,9 @@ interface CatDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCatList(cats: List<CatEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCat(cat: CatEntity)
+
     @Query("DELETE FROM CatEntity WHERE favorite = 0 AND uploaded = 0")
     suspend fun refreshCatListDelete()
 
