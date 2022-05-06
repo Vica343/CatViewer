@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="hu.bme.aut.android.catviewer">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MANAGE_MEDIA"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"
+        tools:ignore="ProtectedPermissions" />
+
 
     <application
         android:name=".CatViewer"
@@ -11,7 +19,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CatViewer">
+        android:theme="@style/Theme.CatViewer"
+        android:requestLegacyExternalStorage="true">
 
         <activity
             android:name=".ui.main.MainActivity"

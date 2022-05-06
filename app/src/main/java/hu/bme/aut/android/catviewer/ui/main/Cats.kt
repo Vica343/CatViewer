@@ -1,6 +1,8 @@
 package hu.bme.aut.android.catviewer.ui.main
 
+import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.*
@@ -9,10 +11,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Upload
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,8 +24,6 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import hu.bme.aut.android.catviewer.model.db.CatEntity
 import hu.bme.aut.android.catviewer.utils.NetworkImage
-import java.io.File
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -50,7 +47,6 @@ fun Cats(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(vertical = 10.dp)
                 .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
         )
@@ -62,6 +58,9 @@ fun Cats(
                 Spacer(Modifier.weight(1f))
 
                 ExposedDropdownMenuBox(
+                    modifier =  Modifier
+                            .width(250.dp)
+                        .padding(horizontal = 20.dp),
                 expanded = expanded,
                 onExpandedChange = {
                     expanded = !expanded
@@ -104,6 +103,7 @@ fun Cats(
                 if (selectedOptionText == "Random images")
                 {
                     Cat(cat = cats[i], viewModel)
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
                 if (selectedOptionText == "Favorite images" && cats[i].favorite)
                 {
@@ -179,31 +179,30 @@ fun UploadButton(
     viewModel: MainViewModel
 ) {
     val context = LocalContext.current
-    val launcher = rememberLauncherForActivityResult(contract =
-    ActivityResultContracts.GetContent()) { uri: Uri? ->
-        if (uri != null) {
-            val file = File(uri.toString())
-            viewModel.uploadImage(uri.toString())
-        };
-
+    var bitmap: Bitmap
+    val launcher = rememberLauncherForActivityResult(
+        contract =
+        ActivityResultContracts.GetContent()
+    ) {
+        if (it != null) {
+            viewModel.uploadImage(it, context)
+        }
     }
-
     IconButton(
+        modifier = Modifier
+            .background(Color.White)
+            .padding(horizontal = 20.dp),
+        onClick = { launcher.launch("image/*") }){
+            Icon(
+                Icons.Filled.Add,
+                contentDescription = "Add",
+                modifier = Modifier
+                    .size(40.dp)
+                    .fillMaxHeight()
+            )
+        }
 
-        onClick = {
-            launcher.launch("image/*")
-        },
-        ) {
-        Icon(
 
-            Icons.Filled.Upload,
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(0.dp)
-
-        )
-    }
 }
 
 @Composable

@@ -1,4 +1,9 @@
 package hu.bme.aut.android.catviewer.ui.main
+import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.FileUtils
+import android.provider.MediaStore
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import hu.bme.aut.android.catviewer.model.Cat
@@ -18,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.distinctUntilChanged
+import java.io.File
 
 
 @HiltViewModel
@@ -63,19 +69,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun uploadImage(url: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun uploadImage(uri: Uri?, context: Context) = viewModelScope.launch(Dispatchers.IO) {
         viewModelScope.launch {
-            repository.UploadImage(url)
+            repository.UploadImage(uri, context)
         }
     }
 
     fun deleteImage(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        // TODO
-    }
-
-
-
-    fun deleteFavorite(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         // TODO
     }
 

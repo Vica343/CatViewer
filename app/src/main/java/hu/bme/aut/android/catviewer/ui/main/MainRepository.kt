@@ -1,7 +1,10 @@
 package hu.bme.aut.android.catviewer.ui.main
 
+import android.content.Context
+import android.net.Uri
+import android.os.FileUtils
+import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import hu.bme.aut.android.catviewer.model.db.CatEntity
@@ -13,7 +16,9 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import timber.log.Timber
+import java.io.File
 import javax.inject.Inject
+
 
 class MainRepository @Inject constructor(
     private val catService: CatService,
@@ -68,9 +73,27 @@ class MainRepository @Inject constructor(
 
     @WorkerThread
     suspend fun UploadImage(
-        url: String,
+        uri: Uri?,
+        context : Context
     ) {
-        catDao.insertCat(CatEntity(null, "0", url, true, false))
+        val sd: File = context.cacheDir
+        val folder = File(sd, "/catimages/")
+        if (!folder.exists()) {
+            if (!folder.mkdir()) {
+                Log.e("ERROR", "Cannot create a directory!")
+            } else {
+                folder.mkdirs()
+            }
+        }
+        val inputstream = context.getContentResolver().openInputStream(uri!!)
+        val file = File(folder, java.util.UUID.randomUUID().toString())
+        val filoutput = file.outputStream()
+        inputstream?.copyTo(filoutput)
+        inputstream?.close()
+        filoutput.close()
+        val uri = Uri.fromFile(file)
+
+        catDao.insertCat(CatEntity(null, "0", uri.toString(), true, false))
     }
 
 }
