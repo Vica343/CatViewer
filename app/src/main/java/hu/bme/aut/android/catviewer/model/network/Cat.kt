@@ -1,5 +1,7 @@
 package hu.bme.aut.android.catviewer.model
 
+import hu.bme.aut.android.catviewer.model.db.CatEntity
+
 data class Cat(
     val breeds: List<Any>,
     val categories: List<Category>,
@@ -13,3 +15,4 @@ data class Category(
     val id: Int,
     val name: String
 )
+

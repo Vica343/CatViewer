@@ -15,6 +15,7 @@ import coil.ImageLoader
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.util.CoilUtils
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import hu.bme.aut.android.catviewer.network.CatService
 import hu.bme.aut.android.catviewer.network.RequestInterceptor
 
@@ -56,6 +57,7 @@ object NetworkModule {
                 "https://api.thecatapi.com/v1/"
             )
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
     }
 
