@@ -13,7 +13,7 @@ import org.junit.Test
 import java.io.IOException
 
 @ExperimentalCoroutinesApi
-class DisneyServiceTest : ApiAbstract<CatService>() {
+class CatServiceTest : ApiAbstract<CatService>() {
 
     private lateinit var service: CatService
 
@@ -28,10 +28,11 @@ class DisneyServiceTest : ApiAbstract<CatService>() {
 
     @Throws(IOException::class)
     @Test
-    fun fetchDisneyPosterListTest() = runBlocking {
+    fun fetchCatListTest() = runBlocking {
         enqueueResponse("/CatList.json")
         val response = service.fetchCatList()
         val responseBody = requireNotNull((response as ApiResponse.Success).data)
+        System.setProperty("javax.net.ssl.trustStore", "NONE")
         mockWebServer.takeRequest()
 
         assertThat(responseBody[0].id, `is`("6ft"))

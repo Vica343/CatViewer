@@ -25,7 +25,7 @@ class CatDaoTest : LocalDatabase() {
     }
 
     @Test
-    fun insertAndLoadPosterListTest() = runBlocking {
+    fun insertAndLoadCatListTest() = runBlocking {
         val mockDataList = mockCatList()
         catDao.insertCatList(mockDataList)
 
@@ -34,6 +34,34 @@ class CatDaoTest : LocalDatabase() {
 
         val mockData = CatEntity.mock()
         assertThat(loadFromDB[0].toString(), `is`(mockData.toString()))
+    }
+
+    @Test
+    fun addAndRemoveFavorite() = runBlocking {
+        val mockDataList = mockCatList()
+        catDao.insertCatList(mockDataList)
+
+        catDao.updateFavorite(0, true)
+        var loadFromDB = catDao.getCatList()
+        assertThat(loadFromDB[0].favorite.toString(), `is`("true"))
+
+        catDao.updateFavorite(0, false)
+        loadFromDB = catDao.getCatList()
+        assertThat(loadFromDB[0].favorite.toString(), `is`("false"))
+    }
+
+    @Test
+    fun UploadAndDeleteImage() = runBlocking {
+        val mockDataList = mockCatList()
+        catDao.insertCatList(mockDataList)
+
+        var loadFromDB = catDao.getCatList()
+        assertThat(loadFromDB[0].uploaded.toString(), `is`("true"))
+
+        catDao.deleteUploadedCat(0)
+        loadFromDB = catDao.getCatList()
+        assertThat(loadFromDB.isEmpty().toString(), `is`("true"))
+
     }
 
 }
