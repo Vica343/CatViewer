@@ -1,7 +1,5 @@
 package hu.bme.aut.android.catviewer.ui.about
 
-import android.content.Context
-import androidx.compose.foundation.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -16,11 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.skydoves.landscapist.CircularReveal
-import com.skydoves.landscapist.coil.CoilImage
 import hu.bme.aut.android.catviewer.R
-import hu.bme.aut.android.catviewer.ui.main.Cats
 
 @Composable
 fun About(

@@ -4,8 +4,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.FileUtils
 import android.provider.MediaStore
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import hu.bme.aut.android.catviewer.model.Cat
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +16,7 @@ import hu.bme.aut.android.catviewer.model.db.CatEntity
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 import androidx.annotation.StringRes
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -42,14 +39,12 @@ class MainViewModel @Inject constructor(
     private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
     private val _isRefreshing: MutableState<Boolean> = mutableStateOf(false)
 
+
     val isLoading: State<Boolean> get() = _isLoading
     val isRefreshing: State<Boolean> get() = _isRefreshing
 
 
-
     private val repository : MainRepository
-
-
 
     init {
         Timber.d("injection MainViewModel")

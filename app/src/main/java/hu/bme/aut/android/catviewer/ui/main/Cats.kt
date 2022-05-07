@@ -1,8 +1,5 @@
 package hu.bme.aut.android.catviewer.ui.main
 
-import android.graphics.Bitmap
-import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.*
@@ -12,7 +9,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.rounded.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +17,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.room.Delete
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import hu.bme.aut.android.catviewer.model.db.CatEntity
@@ -33,7 +28,6 @@ fun Cats(
     viewModel: MainViewModel
 ) {
     val cats: List<CatEntity> by viewModel.catList.collectAsState(initial = listOf())
-    val isLoading: Boolean by viewModel.isLoading
     val isRefreshing: Boolean by viewModel.isRefreshing
 
     val options = listOf("Random images", "Favorite images", "Uploaded images")
@@ -101,7 +95,6 @@ fun Cats(
             for (i in 0..cats.size - 1) {
                 if (selectedOptionText == "Random images") {
                     Cat(cat = cats[i], viewModel)
-                    Spacer(modifier = Modifier.height(10.dp))
                 }
                 if (selectedOptionText == "Favorite images" && cats[i].favorite) {
                     Cat(cat = cats[i], viewModel)
