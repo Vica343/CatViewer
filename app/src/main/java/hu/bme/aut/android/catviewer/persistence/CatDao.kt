@@ -28,6 +28,6 @@ interface CatDao {
     suspend fun updateFavorite(id: Int?, value: Boolean)
 
     @Query("DELETE FROM CatEntity WHERE id = :id")
-    suspend fun deleteUploadedCat(id: Long)
+    suspend fun deleteUploadedCat(id: Int?)
 
 }

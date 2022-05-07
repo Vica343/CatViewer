@@ -72,6 +72,13 @@ class MainRepository @Inject constructor(
     }
 
     @WorkerThread
+    suspend fun DeleteImage(
+        id: Int?
+    ) {
+        catDao.deleteUploadedCat(id)
+    }
+
+    @WorkerThread
     suspend fun UploadImage(
         uri: Uri?,
         context : Context

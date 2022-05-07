@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.room.Delete
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import hu.bme.aut.android.catviewer.model.db.CatEntity
@@ -48,69 +50,63 @@ fun Cats(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally
         )
         {
-            TopAppBar(title = { Text(text = "CatViewer") })
             Spacer(modifier = Modifier.height(20.dp))
             Row {
                 UploadButton(viewModel)
                 Spacer(Modifier.weight(1f))
-
                 ExposedDropdownMenuBox(
-                    modifier =  Modifier
-                            .width(250.dp)
-                        .padding(horizontal = 20.dp),
-                expanded = expanded,
-                onExpandedChange = {
-                    expanded = !expanded
-                }
-            ) {
-                TextField(
-                    readOnly = true,
-                    value = selectedOptionText,
-                    onValueChange = { },
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = expanded
-                        )
-                    },
-                    colors = ExposedDropdownMenuDefaults.textFieldColors()
-                )
-                ExposedDropdownMenu(
                     modifier = Modifier
-                        .exposedDropdownSize(),
+                        .width(250.dp)
+                        .padding(horizontal = 20.dp),
                     expanded = expanded,
-                    onDismissRequest = {
-                        expanded = false
+                    onExpandedChange = {
+                        expanded = !expanded
                     }
                 ) {
-                    options.forEach { selectionOption ->
-                        DropdownMenuItem(
-                            onClick = {
-                                selectedOptionText = selectionOption
-                                expanded = false
+                    OutlinedTextField(
+                        readOnly = true,
+                        value = selectedOptionText,
+                        onValueChange = { },
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                expanded = expanded
+                            )
+                        },
+                        colors = ExposedDropdownMenuDefaults.textFieldColors()
+                    )
+                    ExposedDropdownMenu(
+                        modifier = Modifier
+                            .exposedDropdownSize(),
+                        expanded = expanded,
+                        onDismissRequest = {
+                            expanded = false
+                        }
+                    ) {
+                        options.forEach { selectionOption ->
+                            DropdownMenuItem(
+                                onClick = {
+                                    selectedOptionText = selectionOption
+                                    expanded = false
+                                }
+                            ) {
+                                Text(text = selectionOption)
                             }
-                        ) {
-                            Text(text = selectionOption)
                         }
                     }
                 }
             }
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            for (i in 0..cats.size-1) {
-                if (selectedOptionText == "Random images")
-                {
+            for (i in 0..cats.size - 1) {
+                if (selectedOptionText == "Random images") {
                     Cat(cat = cats[i], viewModel)
                     Spacer(modifier = Modifier.height(10.dp))
                 }
-                if (selectedOptionText == "Favorite images" && cats[i].favorite)
-                {
+                if (selectedOptionText == "Favorite images" && cats[i].favorite) {
                     Cat(cat = cats[i], viewModel)
                 }
-                if (selectedOptionText == "Uploaded images" && cats[i].uploaded)
-                {
+                if (selectedOptionText == "Uploaded images" && cats[i].uploaded) {
                     Cat(cat = cats[i], viewModel)
                 }
             }
@@ -134,8 +130,6 @@ private fun Cat(
 
         elevation = 2.dp,
 
-
-
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
         Box(contentAlignment = Alignment.TopEnd) {
@@ -156,18 +150,18 @@ private fun Cat(
                             centerHorizontallyTo(parent)
                             top.linkTo(parent.top)
                         },
-
-
                     url = cat.url,
                 )
             }
-            
-            FavoriteButton(
-                modifier = Modifier
-                    .padding(4.dp),
-                viewModel,
-                cat
-            )
+            Column() {
+                FavoriteButton(
+                    viewModel,
+                    cat
+                )
+                Spacer(Modifier.weight(1f))
+                if (cat.uploaded)
+                    DeleteButton(viewModel, cat)
+            }
 
         }
 
@@ -179,7 +173,6 @@ fun UploadButton(
     viewModel: MainViewModel
 ) {
     val context = LocalContext.current
-    var bitmap: Bitmap
     val launcher = rememberLauncherForActivityResult(
         contract =
         ActivityResultContracts.GetContent()
@@ -192,22 +185,19 @@ fun UploadButton(
         modifier = Modifier
             .background(Color.White)
             .padding(horizontal = 20.dp),
-        onClick = { launcher.launch("image/*") }){
-            Icon(
-                Icons.Filled.Add,
-                contentDescription = "Add",
-                modifier = Modifier
-                    .size(40.dp)
-                    .fillMaxHeight()
-            )
-        }
-
-
+        onClick = { launcher.launch("image/*") }) {
+        Icon(
+            Icons.Filled.Add,
+            contentDescription = "Add",
+            modifier = Modifier
+                .size(40.dp)
+                .fillMaxHeight()
+        )
+    }
 }
 
 @Composable
 fun FavoriteButton(
-    modifier: Modifier = Modifier,
     viewModel: MainViewModel,
     cat: CatEntity
 ) {
@@ -215,6 +205,8 @@ fun FavoriteButton(
 
     IconToggleButton(
         checked = isFavorite,
+        modifier = Modifier
+            .padding(4.dp),
         onCheckedChange = {
 
             if (isFavorite) {
@@ -239,20 +231,19 @@ fun FavoriteButton(
 
 @Composable
 fun DeleteButton(
-    modifier: Modifier = Modifier,
-    color: Color = Color.White
+    viewModel: MainViewModel,
+    cat : CatEntity
 ) {
 
-    var isFavorite by remember { mutableStateOf(false) }
-
-    IconToggleButton(
-        checked = isFavorite,
-        onCheckedChange = {
-            isFavorite = !isFavorite
+    IconButton(
+        modifier = Modifier
+            .padding(4.dp),
+        onClick  = {
+            viewModel.deleteImage(cat.id!!)
         }
     ) {
         Icon(
-            tint = color,
+            tint = Color.White,
             imageVector = Icons.Filled.Delete,
             contentDescription = null
         )

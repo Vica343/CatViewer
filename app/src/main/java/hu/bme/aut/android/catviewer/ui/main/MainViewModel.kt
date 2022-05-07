@@ -75,8 +75,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun deleteImage(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        // TODO
+    fun deleteImage(id: Int?) = viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
+            repository.DeleteImage(id)
+        }
     }
 
 }
