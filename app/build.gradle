@@ -56,6 +56,14 @@ android {
             returnDefaultValues = true
         }
     }
+    
+    afterEvaluate {
+        project.tasks.withType(Test) {
+            systemProperties.put('proxySet', true)
+            systemProperties.put('proxyHost', 'someproxy.com')
+            systemProperties.put('proxyPort', 80)
+        }
+    }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions.freeCompilerArgs += [
