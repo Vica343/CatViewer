@@ -18,12 +18,6 @@ interface CatDao {
     @Query("SELECT * FROM CatEntity")
     suspend fun getCatList(): List<CatEntity>
 
-    @Query("SELECT * FROM CatEntity WHERE favorite = 1")
-    suspend fun getFavoriteList(): List<CatEntity>
-
-    @Query("SELECT * FROM CatEntity WHERE uploaded = 1")
-    suspend fun getUploadedList(): List<CatEntity>
-
     @Query("UPDATE CatEntity SET favorite = :value WHERE id LIKE :id ")
     suspend fun updateFavorite(id: Int?, value: Boolean)
 

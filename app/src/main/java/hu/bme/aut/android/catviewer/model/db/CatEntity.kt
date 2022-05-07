@@ -21,7 +21,7 @@ data class CatEntity (
             id = 0,
             imageid = "6ft",
             url = "https://cdn2.thecatapi.com/images/6ft.jpg",
-            uploaded = false,
+            uploaded = true,
             favorite = false
         )
     }
